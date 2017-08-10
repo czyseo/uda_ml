@@ -26,7 +26,26 @@ data = featureFormat(data_dict, features_list)
 labels, features = targetFeatureSplit(data)
 
 
+print labels
+print features
+### it's all yours from here forward!
 
-### it's all yours from here forward!  
+from sklearn import tree
+from sklearn.metrics import accuracy_score
 
+clf=tree.DecisionTreeClassifier()
+clf=clf.fit(features, labels)
+pred=clf.predict(features)
 
+acc_min_samples_split = accuracy_score(pred, labels)
+print acc_min_samples_split
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.3, random_state=42)
+clf=tree.DecisionTreeClassifier()
+clf=clf.fit(features_train, labels_train)
+pred=clf.predict(features_test)
+# print pd.DataFrame(grid.cv_results_)
+acc_min_samples_split = accuracy_score(pred, labels_test)
+print acc_min_samples_split

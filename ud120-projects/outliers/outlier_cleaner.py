@@ -7,14 +7,16 @@ def outlierCleaner(predictions, ages, net_worths):
         residual errors (difference between the prediction
         and the actual net worth).
 
-        Return a list of tuples named cleaned_data where 
+        Return a list of tuples named cleaned_data where
         each tuple is of the form (age, net_worth, error).
     """
-    
+
     cleaned_data = []
 
     ### your code goes here
-
-    
-    return cleaned_data
-
+    # import numpy as np
+    # error=(predictions-net_worths)**2
+    # cleaned_data=np.hstack((ages,net_worths,error))
+    # print cleaned_data
+    # return cleaned_data
+    return sorted(zip(ages,net_worths,list((net_worths-predictions)**2)),key=lambda x:x[2],reverse=True)[10:]
